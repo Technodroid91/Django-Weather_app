@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Weather App</title>
+    <link rel="stylesheet" href="static\weather\css\bootstrap.css">
+   <link rel="stylesheet" href="static\weather\css\bootstrap.min.css">
+   <link rel="stylesheet" href="static\weather\css\search.css">
+   <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+         <img src="static\weather\images\iconfinder.svg" alt="">
+         Weather
+      </a>
+   </nav>
+</head>
+<body>
+       
+      <div class="input-group mx-auto mb-4">
+         <form method="POST" class="form-inline md-form  my-3 mx-auto">
+            {% csrf_token %}
+            {{ form.name }}
+            <button class="btn btn-outline-primary  btn-sm m-1" style="padding-bottom: -8px;" type="submit">Add City</i></button>
+         </form>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger mx-auto border-0" style="width:16.5em;margin-top: -2em;" role="alert">
+      {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% for city_weather in weather_list %}
+         <div class="card mx-auto small bg-primary text-center" style="width: 20em;height: 7em;margin-bottom: 0.1em;">
+            <div class="card-body text-white text-justify" style="margin-top: -13px;">
+                  <a href="{% url 'delete_city' city_weather.city  %}">
+                     <button type="button" class="close border-0" style="color: white; margin:-15px; margin-top:-5px;" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </a>
+                  <span class="font-weight-bold text-capitalize" style="font-size: 18px;">{{ city_weather.city }}</span><br>
+                  <span class="small">{{ city_weather.temperature }}°C</span><br>
+                  <span class="font-weight-light" style="font-size: 15px;">{{ city_weather.description }}</span><br>
+                  <img  src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" style="margin-top: -80px;padding-left: 170px;" alt="Image">
+            </div>
+         </div>
+      {% endfor %}
+</body>
+</html>
