@@ -1,5 +1,6 @@
-# Django-Weather_app
-My first Django-app 
+#
+Django-Weather_app
+My first Django-app.. 
 This is a basic weather_app with responsive tabs,
 I used Bootstrap for front-end,you can change if you want,
 It only  pull data from openweatherapi and saveit to db and show it,
